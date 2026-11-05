@@ -1,0 +1,15 @@
+# 依赖与构建产物
+node_modules/
+.next/
+out/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+
+# 本地演示模式产生的数据
+.data/
+
+# 环境变量
+.env
+.env.local
+.env*.local

@@ -869,7 +869,6 @@ a {
 .receipt {
   position: relative;
   padding: 0 0 8px;
-  border-top: 2px solid var(--ink);
 }
 
 .receipt__head {

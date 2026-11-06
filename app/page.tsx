@@ -1,37 +1,11 @@
-import { Clock3, FileCheck2, UserRound } from 'lucide-react';
+import { FileCheck2, UserRound } from 'lucide-react';
 import SubmitForm from '@/components/SubmitForm';
-import AgentMark from '@/components/AgentMark';
 import { SITE } from '@/lib/site';
 import { isDemo } from '@/lib/config';
-import { deadlineParts } from '@/lib/format';
 
 export default function Page() {
-  const deadline = deadlineParts(SITE.deadline);
-
   return (
     <>
-      <header className="topbar">
-        <div className="shell topbar__inner">
-          <a className="brand" href="#top">
-            <span className="brand__seal" aria-hidden="true">
-              <AgentMark />
-            </span>
-            <span className="brand__name">
-              <span className="brand__full">扣子（Coze）智能体设计大赛</span>
-              <span className="brand__short">扣子大赛</span>
-            </span>
-            <span className="brand__sub">{SITE.event}</span>
-          </a>
-          <div className="topbar__right">
-            <span className="topbar__deadline">
-              <Clock3 size={13} strokeWidth={1.5} aria-hidden="true" />
-              <span className="topbar__deadline-label">提交截止</span>
-              {deadline ? `${deadline.date} ${deadline.time}` : '以群内通知为准'}
-            </span>
-          </div>
-        </div>
-      </header>
-
       <main className="shell page" id="top">
         <section className="intro">
           <p className="eyebrow">{SITE.event} · 专业类比赛</p>

@@ -5,7 +5,6 @@ import QRCode from 'qrcode';
 import {
   ArrowRight,
   Check,
-  Download,
   FileText,
   ImagePlus,
   Link2,
@@ -181,12 +180,10 @@ export default function SubmitForm({ demo }: Props) {
   const [dragShot, setDragShot] = useState(false);
   const [dragPdf, setDragPdf] = useState(false);
   const [closed, setClosed] = useState(false);
-  const [savingPdf, setSavingPdf] = useState(false);
 
   const shotInput = useRef<HTMLInputElement>(null);
   const pdfInput = useRef<HTMLInputElement>(null);
   const qrInput = useRef<HTMLInputElement>(null);
-  const receiptRef = useRef<HTMLDivElement>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const usesKb = caps.includes('知识库构建');
@@ -581,62 +578,12 @@ export default function SubmitForm({ demo }: Props) {
     }
   };
 
-  /* ---------------- 保存凭证 PDF ---------------- */
-
-  const saveReceiptPdf = async () => {
-    const node = receiptRef.current;
-    if (!node || savingPdf) return;
-
-    setSavingPdf(true);
-    try {
-      if (document.fonts?.ready) await document.fonts.ready;
-
-      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
-        import('html2canvas'),
-        import('jspdf'),
-      ]);
-
-      const canvas = await html2canvas(node, {
-        scale: 2,
-        backgroundColor: '#fbf8f1',
-        useCORS: true,
-        logging: false,
-        onclone: (clonedDoc) => {
-          clonedDoc
-            .querySelectorAll('.receipt__actions, .receipt__hint')
-            .forEach((element) => element.remove());
-        },
-      });
-      const imgData = canvas.toDataURL('image/png');
-
-      const pageWidth = 210;
-      const margin = 10;
-      const imgWidth = pageWidth - margin * 2;
-      const imgHeight = (canvas.height / canvas.width) * imgWidth;
-      const pageHeight = Math.max(120, imgHeight + margin * 2);
-      const pdf = new jsPDF({
-        unit: 'mm',
-        format: [pageWidth, pageHeight],
-        orientation: 'portrait',
-      });
-      pdf.addImage(imgData, 'PNG', margin, margin, imgWidth, imgHeight);
-
-      const shortId = (receipt?.id || 'receipt').replace(/-/g, '').slice(0, 8).toUpperCase();
-      pdf.save(`作品提交凭证-${shortId}.pdf`);
-    } catch (error) {
-      console.error(error);
-      toast('凭证 PDF 生成失败，请重试', 6000);
-    } finally {
-      setSavingPdf(false);
-    }
-  };
-
   /* ---------------- 成功页 ---------------- */
 
   if (stage === 'done' && receipt) {
     const shortId = receipt.id.replace(/-/g, '').slice(0, 8).toUpperCase();
     return (
-      <div className="receipt" ref={receiptRef}>
+      <div className="receipt">
         <div className="receipt__head">
           <div>
             <p className="eyebrow">Submission receipt</p>
@@ -680,19 +627,8 @@ export default function SubmitForm({ demo }: Props) {
           </div>
         </dl>
 
-        <div className="receipt__actions">
-          <button
-            type="button"
-            className="btn btn--primary"
-            onClick={saveReceiptPdf}
-            disabled={savingPdf}
-          >
-            <Download size={15} strokeWidth={1.7} aria-hidden="true" />
-            {savingPdf ? '正在生成 PDF' : '保存凭证'}
-          </button>
-        </div>
         <p className="receipt__hint">
-          请下载并保存凭证 PDF。若需修改作品，请携带提交编号联系负责人
+          此页数据可自行截图或复制保存。若需修改作品，请携带提交编号联系负责人
           {` ${SITE.contact.name}（${SITE.contact.phone}）`}。
         </p>
       </div>

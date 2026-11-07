@@ -497,21 +497,6 @@ a {
   margin: 0;
 }
 
-.promise__link {
-  border: 0;
-  border-bottom: 1px solid var(--red);
-  background: none;
-  padding: 0;
-  font: inherit;
-  color: var(--red);
-  cursor: pointer;
-}
-
-.promise__link:hover {
-  color: var(--red-deep);
-  border-bottom-color: var(--red-deep);
-}
-
 .promise__note {
   margin: 6px 0 0;
   font-size: 10.5px;
@@ -973,69 +958,8 @@ a {
 }
 
 /* ============================================================
-   弹窗 / 提示
+   提示
    ============================================================ */
-
-.dialog {
-  width: min(520px, calc(100vw - 32px));
-  max-height: 84vh;
-  padding: 0;
-  border: 1px solid var(--ink);
-  border-radius: 0;
-  background: var(--sheet);
-  color: var(--ink);
-  box-shadow: 0 40px 90px -40px rgba(22, 19, 15, 0.55);
-}
-
-.dialog::backdrop {
-  background: rgba(22, 19, 15, 0.55);
-}
-
-.dialog__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px 12px;
-}
-
-.dialog__head h2 {
-  margin: 0;
-  font-size: 17px;
-  letter-spacing: 0.06em;
-}
-
-.dialog__close {
-  border: 0;
-  background: none;
-  font-size: 22px;
-  line-height: 1;
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.rules {
-  margin: 0;
-  padding: 4px 24px 4px 42px;
-  font-size: 13px;
-  line-height: 1.9;
-}
-
-.rules li {
-  margin-bottom: 6px;
-}
-
-.dialog__note {
-  margin: 10px 24px 18px;
-  padding-top: 12px;
-  border-top: 1px solid var(--rule);
-  font-size: 11px;
-  line-height: 1.8;
-  color: var(--muted);
-}
-
-.dialog__actions {
-  padding: 0 24px 22px;
-}
 
 .toast {
   position: fixed;

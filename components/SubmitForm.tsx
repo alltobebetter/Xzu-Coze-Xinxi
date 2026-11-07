@@ -1225,18 +1225,7 @@ export default function SubmitForm({ demo }: Props) {
             <div className="promise">
               <p className="promise__text">
                 我承诺作品为本人原创，不存在知识产权纠纷；智能体链接可访问至成绩公布后 30
-                日；提交信息真实有效，并已阅读
-                <button
-                  type="button"
-                  className="promise__link"
-                  onClick={() => {
-                    const dialog = document.getElementById('rules-dialog') as HTMLDialogElement | null;
-                    dialog?.showModal();
-                  }}
-                >
-                  作品要求
-                </button>
-                。
+                日；提交信息真实有效。
               </p>
               <p className="promise__note">提交即视为确认上述承诺</p>
             </div>
@@ -1271,42 +1260,6 @@ export default function SubmitForm({ demo }: Props) {
       <p className="formfoot">
         提交编号将在提交成功后生成，请截图保存。本页不收集身份证号、住址等敏感信息。
       </p>
-
-      <dialog className="dialog" id="rules-dialog">
-        <div className="dialog__head">
-          <h2>作品要求（合格线）</h2>
-          <button
-            type="button"
-            className="dialog__close"
-            aria-label="关闭"
-            onClick={() => (document.getElementById('rules-dialog') as HTMLDialogElement)?.close()}
-          >
-            ×
-          </button>
-        </div>
-        <ol className="rules">
-          <li>具备明确的角色定位与服务边界；</li>
-          <li>能够处理不少于两类典型用户意图；</li>
-          <li>
-            综合运用不少于两项平台能力（结构化 Prompt 设计、知识库构建、工作流编排、插件调用）；
-          </li>
-          <li>配置完整的开场白、引导语及异常兜底回复机制；</li>
-          <li>鼓励配置藏汉双语对话能力与多轮上下文记忆（鼓励项，不计入合格线，计入评分）。</li>
-        </ol>
-        <p className="dialog__note">
-          任一项不满足的，工作人员将通知限期整改；整改后仍不符合的不进入评审。
-        </p>
-        <div className="dialog__actions">
-          <button
-            type="button"
-            className="btn btn--primary"
-            style={{ width: '100%' }}
-            onClick={() => (document.getElementById('rules-dialog') as HTMLDialogElement)?.close()}
-          >
-            我知道了
-          </button>
-        </div>
-      </dialog>
 
       <div className={`toast${toastText ? ' is-on' : ''}`} role="status" aria-live="polite">
         {toastText}
